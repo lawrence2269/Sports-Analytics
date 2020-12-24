@@ -13,7 +13,6 @@
 \email{lawra776@student.liu.se}
 
 \date{December 2020}
-
 \begin{document}
 \maketitle
 \pagestyle{plain} % Remove ACM page header
@@ -24,7 +23,7 @@ analytics is also playing a major role in Sports industry such as football, base
 next move, injury analysis, position analysis and etc. Sports analytics is being spoken as a concept for many years which 
 could be used to improve team performance, as a result, the revenue generation is very much improved for the team. For this 
 project, we will mostly focus on basketball. In order to have a good prediction and analysis report, we need to have proper
-dataset and most importantly, the data must have most important attributes that could provide insights for a given problem.
+dataset and most importantly, the data must also have most important attributes that could provide insights for a given problem.
 
 There are many ways that the data can be used by the team for various purposes. The kind of data that the team would use includes
 average stats of the players, per game stats, and etc. These data can be used to understand a player in terms of strengths and 
@@ -72,10 +71,96 @@ reading.
 The terms that will be discussed are:
 \begin{itemize}
     \item  Draft picking and its process.
-    \item  Machine or mathematical learning.
+    \item  Machine learning.
     \item  Sports Analytics.
 \end{itemize}
 \subsection{Draft picking and its process}
+NBA draft is an annual event where basketball teams select players from american colleges and from international professional league
+for their rosters. Once a team selects a player, then the team has right to sign a NBA contract with the player.
+
+In draft picking process, teams select eligible players in turns. There are two rounds in the draft where all 30 teams participate
+to select a player in turns, meaning every year 60 eligible players are drafted, but teams that did not reach the playoffs 
+in the previous regular season or teams with worst performs selects a player by undergoing a process called \textit{NBA Draft Lottery}.
+This process determines the selection order of the team or provides an opportunity for the team which wins the lottery to pick the
+first draft followed by other worst performing teams. The team with best records receives the 30\textsuperscript{th} pick. During the
+second round in the draft, there is no lottery system, but teams pick the draft in the reverse order based on the previous regular 
+season's standings. Moreover, the teams can exchange their draft picks with each other, for example, in 2019 the Minnesota Timberwolves 
+traded the No. 11 pick and forward Dario Saric to the Phoenix Suns in exchange for the No. 6 pick. But, there are some restrictions
+based on \textit{The Stepien Rule}, that is, this rule prevents the team from trading their first-round draft pick in consecutive 
+years \cite{draft}.
+
+\subsection{Machine learning}
+Machine learning is a general concept and broader area which consists of many definitions provided by recognized and reliable 
+universities, institutions, professors and organizations and they are as follows,
+\begin{itemize}
+    \item "Machine learning is based on algorithms that can learn from data without relying on rules-based programming." \cite{machineLearning1}
+    \item "The field of Machine Learning seeks to answer the question “How can we build computer systems that automatically 
+           improve with experience, and what are the fundamental laws that govern all learning processes?" \cite{machineLearning2}
+    \item and etc.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.70]{Machine_Learning.png}
+    \caption{Machine Learning in an eagle view}
+    \label{fig:ml}
+\end{figure}
+Machine learning can be categorized in three types,
+\begin{itemize}
+    \item Supervised Learning.
+    \item Unsupervised Learning.
+    \item Reinforcement Learning.
+\end{itemize}
+The definitions for the above terms are:
+\begin{itemize}
+    \item "Supervised learning algorithms generate a function that maps inputs to desired outputs, based
+    on a set of examples with known output (labeled examples)" \cite{tzanis2009machine}.
+    \item "Unsupervised learning algorithms find patterns and relationships over a given set of inputs 
+    (unlabeled examples)" \cite{tzanis2009machine}.
+    \item "Reinforcement learning, where an algorithm learns a policy of how to act given an observation of the world" \cite{tzanis2009machine}.
+\end{itemize}
+In this project, we will mostly focus on Supervised and Unsupervised learning algorithms. The different types of algorithms in both
+supervised and unsupervised are given below,
+
+Some algorithms of supervised learning:
+\begin{itemize}
+    \item Nearest Neighbor
+    \item Naive Bayes
+    \item Support Vector Machine (SVM)
+    \item Logistic Regression
+    \item Linear Regression
+    \item and etc.
+\end{itemize}
+Some algorithms of unsupervised learning:
+\begin{itemize}
+    \item k-means clustering
+    \item Association Rules \cite{typeofml}
+    \item and etc.
+\end{itemize}
+\subsection{Sports Analytics}
+Sports analytics is the application of above mentioned algorithms to sport in order to draw useful insights which could help 
+an individual athlete's performance, or a team's performance for a season. It can also help teams to perform injury analysis
+and steps to mitigate them, salary of a player based on his previous performances and etc. Nowadays,  many teams, coaches and 
+even players are adopting sports analytics for decision making.
+
+"The analytics split nicely between the front-office and back-office. Front-office analytics
+include topics like analyzing fan behavior, ranging from predictive models for season ticket
+renewals and regular ticket sales, to scoring tweets by fans regarding the team, athletes,
+coaches, and owners. This is very similar to traditional customer relationship management.
+Financial analysis is also a key area, especially for the pros where salary caps or scholarship
+limits are part of the equation. Back-office uses include analysis of both individual athletes as
+well as team play. For individual players, there is a focus on recruitment models and scouting
+analytics, analytics for strength and fitness as well as development, and predictive models for
+avoiding overtraining and injuries. Concussion research is a hot field. Team analytics include
+strategies and tactics, competitive assessments, and optimal roster choices under various onfield or on-court situations.” \cite{tichy2016changing}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{sportsanalytics.jpg}
+    \caption{Sports Analytics}
+    \label{fig:sa}
+\end{figure}
+However, the analytical methods and data has to be kept safe and should be extremely careful because the data and methodology
+could lead to numerous problems such as issues with betting companies, non-ethical training of atheletes leading to injuries and 
+etc. \cite{spa}
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
 \end{document}
