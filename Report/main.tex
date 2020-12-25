@@ -3,6 +3,8 @@
 \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{makecell}
 
 \settopmatter{printacmref=false}
 
@@ -119,7 +121,7 @@ The definitions for the above terms are:
     \item "Reinforcement learning, where an algorithm learns a policy of how to act given an observation of the world" \cite{tzanis2009machine}.
 \end{itemize}
 In this project, we will mostly focus on Supervised and Unsupervised learning algorithms. The different types of algorithms in both
-supervised and unsupervised are given below,
+supervised and unsupervised learning are given below, \\
 
 Some algorithms of supervised learning:
 \begin{itemize}
@@ -130,6 +132,7 @@ Some algorithms of supervised learning:
     \item Linear Regression
     \item and etc.
 \end{itemize}
+\par
 Some algorithms of unsupervised learning:
 \begin{itemize}
     \item k-means clustering
@@ -161,6 +164,138 @@ strategies and tactics, competitive assessments, and optimal roster choices unde
 However, the analytical methods and data has to be kept safe and should be extremely careful because the data and methodology
 could lead to numerous problems such as issues with betting companies, non-ethical training of atheletes leading to injuries and 
 etc. \cite{spa}
+\section{Methodology}
+This section describes the framework used for draft picking in basketball using Machine learning. The proposed framework consists of 
+3 mathematical models namely career longevity model, providing positions to selected players and grouping players based on their 
+performance into two groups, either 1 or 0. Initially, the user or the coach or the team manager loads the players data to \textbf{model 1},
+which provides list of players who will stay with the league for more than 5 years and list of players who don't stay for more than
+5 years. This output is provided as an input to \textbf{model 2} which predicts the positions of the players based on previous 
+performance. Finally, the output of 2\textsuperscript{nd} model is provided as an input to the \textbf{model 3} where players are 
+grouped as 1 and 0, that is, either good or bad pick. This proposed framework is time efficiency, environmental friendly (less 
+paperwork) and user friendly.
+
+Subsection \textbf{6.1} describes the libraries or functions used in the proposed framework. Subsection \textbf{6.2} descibes about the 
+source of data, structure of data, and pre-processing of data. Subsection \textbf{6.3} describe both supervised and unsupervised 
+learning algorithms which are used to create 3 mathematical models for draft picking. The framework applies many algorithms and 
+chooses one algorithm which performs better than the other algorithms for each model. This section concludes with 
+Subsection \textbf{6.4}, which describes the evaluation metrics used.
+
+\subsection{Libraries}
+The following Python programming packages or libraries have been used by the proposed framework for data pre-processing and model building,
+\begin{itemize}
+    \item NumPy for numerical computations.
+    \item Pandas for data loading.
+    \item MatplotLib and Seaborn for visualization.
+    \item sklearn for evaluation metrics and model building (Supervised and Unsupervised learning).
+    \item Pickle for loading and saving of data objects, mathematical model objects and etc.
+    \item statsmodel for checking  multicollinearity in data.
+\end{itemize}
+\subsection{Dataset}
+\subsubsection{Source of data}
+\hfill\\
+The two main sources for dataset used by the proposed framework are,
+\begin{itemize}
+    \item \href{https://www.basketball-reference.com/}{basketball-reference.com}
+    \item \href{https://data.world/}{Data.world}
+\end{itemize}
+\par
+The data provided by Basketball-reference.com contains the NBA players overall performance such as rebounds, turnovers, points, games 
+played and etc. for a regular season which can be either web scrapped or downloaded in comma-separated format file (CSV). Data.world
+provides NBA players data such as players demographic data, players salary data and etc. which are less in number. By combining data
+from both sources, yields a large dataset required for model building.
+
+\subsubsection{Structure of data}
+\hfill\\
+The dataset contains players performance with the following main attributes,
+\begin{center}
+    \begin{table}[H]
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Attributes} & \textbf{Descriptions} \\
+            \hline
+            GP & Games Played \\
+            \hline
+            POS & Position \\
+            \hline
+            MP & Minutes Played \\
+            \hline
+            PTS & Points \\
+            \hline
+            FG & \makecell{Field Goals (both 2 point field goals \\ and 3 point field goals)} \\
+            \hline
+            FGA & \makecell{Field Goal Attempts (includes both 2-point \\ field goal attempts and \\3-point field goal attempts)} \\
+            \hline
+            FG\% & Field Goal Percentage; the formula is FG / FGA. \\
+            \hline
+            3P & \makecell{3-Point Field Goals (available since \\the 1979-80 season in the NBA)} \\
+            \hline
+            3PA & \makecell{3-Point Field Goal Attempts (available since \\the 1979-80 season in the NBA)} \\
+            \hline
+            3P\% & \makecell{3-Point Field Goal Percentage (available since \\the 1979-80 season in the NBA); \\the formula is 3P / 3PA.}\\
+            \hline
+            FT & Free Throws \\
+            \hline
+            FTA & Free Throw Attempts \\
+            \hline
+            FT\% & Free Throw Percentage; the formula is FT / FTA\\
+            \hline
+            ORB & Offensive Rebounds \\
+            \hline
+            DRB & Defensive Rebounds \\
+            \hline
+            TRB & Total Rebounds \\
+            \hline
+            AST & Assist \\
+            \hline
+            AST\% & \makecell{Assist percentage \\the formula is 100 * AST / (((MP / (Tm MP / 5))\\ * Tm FG) - FG).
+            Assist percentage is an estimate of the \\percentage of teammate field \\goals a player assisted while he was on the floor.} \\
+            \hline
+            STL & Steal \\
+            \hline
+            BLK & Block \\
+            \hline
+            BLK\% & \makecell{Block Percentage \\ the formula is 100 * (BLK * (Tm MP / 5)) /\\ (MP * (Opp FGA - Opp 3PA)) \\
+            Block percentage is an estimate of the percentage of \\opponent two-point field goal attempts blocked\\ by the player while he was on the floor}\\
+            \hline
+            TOV & Turnover \\
+            \hline
+            TOV\% & \makecell{Turnover percentage \\the formula is 100 * TOV / (FGA + 0.44 * FTA + TOV)\\Turnover percentage is an estimate \\of turnovers per 100 plays.} \\
+            \hline
+             & and etc. \\
+            \hline
+        \end{tabular}
+        \caption{Data attributes and its description}
+        \label{tab:attributesTable}
+    \end{table}
+\end{center}
+There are other attributes such as VORP, WS, WS$/$48 and etc. which can be known further from the following page \textbf{\href{https://www.basketball-reference.com/about/glossary.html}
+{basketball-reference.com}} glossary. These attributes contains both continuous and categorical data type.
+\subsubsection{Pre-processing}
+\hfill\\
+The pre-processing process consists of following steps,
+\begin{itemize}
+    \item Missing value imputation - Missing values in the data are imputed by taking median of a column.
+    \item Converting target variable or variable to be predicted to category data type.
+    \item Filtering data using a constraint for getting useful insights from data.
+    \item In case of regression, highly correlated variables with each other are removed using correlation plot to avoid multicollinearity problem. 
+    \item Sampling, if the classes (response variable data) are imbalanced.
+    \item Checking for linear relationship for best separaion in case of classification and best line fitting in case of regression.
+    \item Scaling, that is, normalizing the data to have normal distribution.
+\end{itemize}
+\subsection{Machine learning algorithms}
+This section describes about machine learning algorithms that were chosen for each model and reasons for chosing them.
+\subsubsection{Model 1}
+\hfill\\
+The model 1 performs predicting whether a players will stay in the league for more than 5 years or not. The dataset used for this
+task is taken from \textit{data.world} which contains 21 attributes where 20 attributes are independent variables and
+1 attribute is response variable and has 1340 rows. After performing the above mentioned pre-processing steps, the separability
+between independent variables and dependent variable was found using scatter plot, see figure \ref{fig:model1scatter}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{model_1_scatter_plot.png}
+    \caption{Model 1 scatter plot between independent and dependent variables}
+    \label{fig:model1scatter}
+\end{figure}
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
 \end{document}
