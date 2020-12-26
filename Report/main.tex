@@ -284,18 +284,50 @@ The pre-processing process consists of following steps,
 \end{itemize}
 \subsection{Machine learning algorithms}
 This section describes about machine learning algorithms that were chosen for each model and reasons for chosing them.
-\subsubsection{Model 1}
+\subsubsection{Model 1 and Model 2}
 \hfill\\
 The model 1 performs predicting whether a players will stay in the league for more than 5 years or not. The dataset used for this
 task is taken from \textit{data.world} which contains 21 attributes where 20 attributes are independent variables and
 1 attribute is response variable and has 1340 rows. After performing the above mentioned pre-processing steps, the separability
-between independent variables and dependent variable was found using scatter plot, see figure \ref{fig:model1scatter}.
+between independent variables and dependent variable was found using scatter plot between games played and points earned coloured by 
+response variable, see figure \ref{fig:model1scatter}.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.25]{model_1_scatter_plot.png}
     \caption{Model 1 scatter plot between independent and dependent variables}
     \label{fig:model1scatter}
 \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{model_1_bar_plot.png}
+    \caption{Model 1 count plot for classes in response variable}
+    \label{fig:model1bar}
+\end{figure}
+The model 2 performs predicting position in the basketball court based on the player's previous performance in the earlier regular 
+seasons. The dataset used for this task is taken from \textit{basketball-reference.com} which consists of 47 attributes where 46 
+attributes are independent variable and 1 variable is response variable and has over 10,000 rows of data. After performing the above 
+mentioned pre-processing steps, the separability between independent variables and dependent variable was found using scatter plot
+between games played and points earned coloured by response variable, see figure \ref{fig:model2scatter}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{model_2_scatter_plot.png}
+    \caption{Model 2 scatter plot between independent and dependent variables}
+    \label{fig:model2scatter}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{model_2_bar_plot.png}
+    \caption{Model 2 count plot for classes in response variable}
+    \label{fig:model2bar}
+\end{figure}
+\hfill\\
+From the scatter plots, it can be observed that the data is not linearly separable. Moreover, it is not possible to create a classification 
+boundary to separate data points that belong to differenct classes of the response variable. Hence, non-linear classification 
+algorithms such as Support Vector Machine (SVM), K-Nearest Neighbor, and etc. has to be applied. Given the non-linear 
+separability constraint and imbalanced dataset (model 1), see figure \ref{fig:model1bar}, it is best to choose Support Vector Machine (SVM) 
+algorithm for both model 1 and model 2 because they train very well and yield good prediction results than other supervised learning 
+algorithms \cite{imam2006z}. Before getting into detailed execution and discussion of test results, let us first understand about 
+Support Vector Machine (SVM) algorithm.
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
 \end{document}
