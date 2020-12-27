@@ -117,7 +117,7 @@ The definitions for the above terms are:
     \item "Supervised learning algorithms generate a function that maps inputs to desired outputs, based
     on a set of examples with known output (labeled examples)" \cite{tzanis2009machine}.
     \item "Unsupervised learning algorithms find patterns and relationships over a given set of inputs 
-    (unlabeled examples)" \cite{tzanis2009machine}.
+    (unlabelled examples)" \cite{tzanis2009machine}.
     \item "Reinforcement learning, where an algorithm learns a policy of how to act given an observation of the world" \cite{tzanis2009machine}.
 \end{itemize}
 In this project, we will mostly focus on Supervised and Unsupervised learning algorithms. The different types of algorithms in both
@@ -177,8 +177,8 @@ paperwork) and user friendly.
 Subsection \textbf{6.1} describes the libraries or functions used in the proposed framework. Subsection \textbf{6.2} descibes about the 
 source of data, structure of data, and pre-processing of data. Subsection \textbf{6.3} describe both supervised and unsupervised 
 learning algorithms which are used to create 3 mathematical models for draft picking. The framework applies many algorithms and 
-chooses one algorithm which performs better than the other algorithms for each model. This section concludes with 
-Subsection \textbf{6.4}, which describes the evaluation metrics used.
+chooses one algorithm which performs better than the other algorithms for each model. This section concludes 
+with Subsection \textbf{6.4}, which describes the evaluation metrics used.
 
 \subsection{Libraries}
 The following Python programming packages or libraries have been used by the proposed framework for data pre-processing and model building,
@@ -277,7 +277,6 @@ The pre-processing process consists of following steps,
     \item Missing value imputation - Missing values in the data are imputed by taking median of a column.
     \item Converting target variable or variable to be predicted to category data type.
     \item Filtering data using a constraint for getting useful insights from data.
-    \item In case of regression, highly correlated variables with each other are removed using correlation plot to avoid multicollinearity problem. 
     \item Sampling, if the classes (response variable data) are imbalanced.
     \item Checking for linear relationship for best separaion in case of classification and best line fitting in case of regression.
     \item Scaling, that is, normalizing the data to have normal distribution.
@@ -320,14 +319,233 @@ between games played and points earned coloured by response variable, see figure
     \caption{Model 2 count plot for classes in response variable}
     \label{fig:model2bar}
 \end{figure}
-\hfill\\
-From the scatter plots, it can be observed that the data is not linearly separable. Moreover, it is not possible to create a classification 
+From the scatter plots, it can be observed that the data are not linearly separable. Moreover, it is not possible to create a classification 
 boundary to separate data points that belong to differenct classes of the response variable. Hence, non-linear classification 
 algorithms such as Support Vector Machine (SVM), K-Nearest Neighbor, and etc. has to be applied. Given the non-linear 
 separability constraint and imbalanced dataset (model 1), see figure \ref{fig:model1bar}, it is best to choose Support Vector Machine (SVM) 
-algorithm for both model 1 and model 2 because they train very well and yield good prediction results than other supervised learning 
+algorithm with kernel trick for both model 1 and model 2 because they train very well and yield good prediction results than other supervised learning 
 algorithms \cite{imam2006z}. Before getting into detailed execution and discussion of test results, let us first understand about 
 Support Vector Machine (SVM) algorithm.
+
+Support Vector Machine (SVM) is one of the supervised learning algorithm used for classification, regression and outlier detection.
+The objective of SVM is to find a hyperplane in N-dimensional space (N - number of attributes or features) which distinctly classifies
+the data points, see figure \ref{fig:svm_1}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{svm_1.png}
+    \caption{Hyperplane separating datapoints in N-dimesnional space}
+    \label{fig:svm_1}
+\end{figure}
+From the above figure, we could see that to separate two classes of data points, there are many hyperplanes that could be chosen.
+In order to choose the hyperplane that best separates the two classes of data points, we need to find \textit{maximum margin} - the
+maximum distance between data points of both classes. Let us now look at hyperplanes and support vectors followed by maximum margin.
+
+Hyperplanes are classification boundary that separated data points. Data points falling to either side of the hyperplane are 
+attributed to different classes. The dimension of hyperplane depends on the number of input features, that is, if the number of 
+input feature is 2, then the hyperplane is a line, see figure \ref{fig:svm_hyperplane_1}. If the number of input feature is 3, then 
+the hyperplane becomes two dimensional plane, see figure \ref{fig:svm_hyperplane_2}. It might not be possible to imagine, if the 
+number of features exceeds 3.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{svm_hyperplane_1.png}
+    \caption{Hyperplane in 1-dimesnional space}
+    \label{fig:svm_hyperplane_1}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.60]{svm_hyperplane_2.png}
+    \caption{Hyperplane in 2-dimesnional space}
+    \label{fig:svm_hyperplane_2}
+\end{figure}
+
+Support vectors are data points which are closer to the hyperplane. The orientation and position of hyperplane are decided by 
+these support vectors. The margin of the classifier is maximized using these support vectors. In SVM, we are trying to maximize 
+the distance between the data points and hyperplane which is achieved by applying a loss function - \textit{Hinge Loss}. The intuition
+behind maximizing the margin is to avoid \textit{misclassification} of data points, that is, if we have made a mistake in placing 
+the boundary, then the model will not generalize well on unforseen data. Moreover, maximizing the margin avoids local minima
+\cite{jakkula2006tutorial}. 
+
+The equation for hyperplane in P-dimension is given below.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.40]{SVM_Equation_for_p-dimension.png}
+    \caption{Equation for P-dimesnional space}
+    \label{fig:svm_dimension_equation}
+\end{figure}
+
+Where the datapoints are, see figure \ref{fig:svm_datapoints},
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.40]{svm_data_points.png}
+    \caption{Equation for P-dimesnional space}
+    \label{fig:svm_datapoints}
+\end{figure}
+
+and the datapoints are classified into different classes based on the below equation, see figure \ref{fig:classification}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.40]{dimension_equation_for_classification.png}
+    \caption{Equation for classifying data points}
+    \label{fig:classification}
+\end{figure}
+Now, we understand that data which are not linearly separable are projected to higher dimensions and classified, but it may not be 
+easy to perform this, if the number of features increase. It would be computationally expensive to project large dimesnional data
+to higher dimensions. This where \textit{Kernel Trick} is applied in order to resolve this problem \cite{kernel}. For model 1 and 
+model 2, the number of features are high in number and the data is not linearly separable. Hence, SVM kernel trick has to be used
+to solve the task of classifying players and predicting positions of players. "The trick is that kernel methods represent the data 
+only through a set of pairwise similarity comparisons between the original data observations x (with the original coordinates in the 
+lower dimensional space), instead of explicitly applying the transformations $\phi(x)$ and representing the data by these 
+transformed coordinates in the higher dimensional feature space" \cite{kernel}. There are many kernels available in SVM namely
+\textit{Linear}, \textit{polynomial}, \textit{Radial Base Function (RBF)}, and \textit{sigmoid}. From the list of aforementioned kernels, only polynomial
+and rbf kernel methods can be applied to our data. Before choosing the kernel method that best suits our data, we need to understand
+some hyperparameters such as gamma, and C.
+\begin{itemize}
+    \item Gamma - inverse of the standard deviation of the RBF kernel (Gaussian function), which is used as similarity measure between two points
+    \cite{scikitlearn}.
+    \item C - Penalty factor for misclassification. \cite{scikitlearn}.
+\end{itemize}
+The best kernel method is chosen by performing \textit{GridSearch Cross Validation} with various values for aforementioned hyperparameters.
+This method provides the hyperparameters with values and kernel method which generalizes well on unforseen data. Based on the 
+values provided by GridSearch method, the models are trained by using SVM function from sklearn library on a part of data and tested 
+on remaining part of the data. The test results of the models are explained in the forthcoming sections.
+
+Finally, model 3 performs clustering or grouping of players into groups based on their previous performances. This is an unsupervised
+machine learning task where the dataset does not contain labels for prediction or grouping. The dataset used for this task is taken from 
+\textit{basketball-reference.com} which consists of 47 attributes where 46 attributes are independent variable and 1 variable is 
+response variable and has over 28,000 rows of data. Data was grouped by players and fileterd based on the number of games played by players 
+is greater than 30 after performing the above mentioned pre-processing steps because data with games played less than 30 will not provide 
+meaningful insight. There were 3 features missing from the data namely FT\% - Free Throw percentage, 2P\% - 2 Point percentage, and
+3P\% - 3 Point percentage which were created by applying feature engineering, that is, creating new features with available data 
+points. The simplest form of clustering is the partitional clustering which aims at partitioning the given data into set of disjoint
+subsets (clusters). The most commonly used clustering criterion is \textit{clustering error} which measures the quality of clustering.
+A popular clustering method that minimizes the clustering error is the k-means algorithm \cite{likas2003global}. Hence, K-means 
+clustering algorithm would be a good technique to cluster the players. Moreover, in K-means we can specify the number of clusters 
+we require which is an added advantage. Before getting into detailed execution and discussion of test results, let us first understand about 
+K-means algorithm.
+
+K-means algorithm is one of the unsupervised algorithm mainly used for clustering of unlabelled data. A good clustering solution 
+is one that finds clusters such that the observations within each cluster are more similar than the clusters themselves, see figure
+\ref{fig:kmeans}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{kmeans.png}
+    \caption{K-means clustering}
+    \label{fig:kmeans}
+\end{figure}
+The process behind K-means algorithm is very simple. Firstly, we need to choose an appropriate value for "K". Secondly, we need to 
+randomly choose an initial centroid (centre coordinates) for each cluster, then we need apply two step process which is given below,
+\begin{itemize}
+    \item Assignment step - Assign each data point to it's nearest centre.
+    \item Update step - Update the centroids as being the centre of of their observation.
+\end{itemize}
+We repeat these steps over and over until there is no further change in the clusters. At this point the algorithm converges and 
+we retrieve the final clusterings. Every data point is assigned to each of the clusters thus reducing the incluster sum of squares.
+In other words, K-means identifies K centroids and allocates the data points to each K centroids while keeping the centroid as small
+as possible \cite{kmeans}. 
+
+The pictorial representation of working of K-means algorithm, see figure \ref{fig:kmeansworking},
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.55]{kmeans_1.jpeg}
+    \caption{Working of K-means clustering}
+    \label{fig:kmeansworking}
+\end{figure}
+
+The value of "K" is determined by two methods namely \textit{Elbow method} and \textit{Silhouette score}. However, elbow method is 
+the most commonly used to determine K value. The elbow method runs the K-means algorithm on the dataset for various K values, then
+for each K value computes the average score for all clusters and stores. When these values are plotted to visually determine the best 
+value for K. If the line chart looks like an arm, then the “elbow” (the point of inflection on the curve) is the best value of k. 
+The “arm” can be either up or down, but if there is a strong inflection point, it is a good indication that the underlying model 
+fits best at that point \cite{elbow}. The pictorial representation of choosing K using elbow method, see figure \ref{fig:elbowmethod}.
+The test results of this model is explained in the forthcoming sections.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{elbow_method.png}
+    \caption{Elbow Method}
+    \label{fig:elbowmethod}
+\end{figure}
+
+\subsection{Evaluation Metrics}
+\hfill\\
+In the field of machine learning there are several measures to know the quality and characteristics of a model. The most commonly used
+evaluation metrics for classification task are \textit{Accuracy}, \textit{Recall}, \textit{Precision}, \textit{F1 score} and 
+\textit{Receiver Operating Characteristic (ROC) curve}. The evaluation metrics used for regression task are 
+\textit{Adjusted R\textsuperscript{2}}, \textit{Mean Squared Error(MSE)}, \textit{Root-Mean-Squared-Error(RMSE)}, and etc. 
+The evaluation metrics used for clustering tasks are \textit{Silhouette Coefficient} and \textit{Dunn's index} 
+\cite{powers2020evaluation}. In this project, we are going to use the evaluation metric for classification and clustering alone. 
+Let us first understand about each evaluation metric before reading further.
+
+Evaluation of the performance of a classification model is based on the counts of test records correctly and incorrectly predicted 
+by the model. The confusion matrix, see figure \ref{fig:confusionmatrix} which provides a more insightful picture which is not only the 
+performance of a predictive model, but also which classes are being predicted correctly and incorrectly, and what type of errors 
+are being made \cite{confusionmatrix}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.22]{confusion_matrix.png}
+    \caption{Confusion Matrix}
+    \label{fig:confusionmatrix}
+\end{figure}
+\hfill\\
+\textbf{Accuracy}: In general, the accuracy metric measures the ratio of correct predictions over the total
+number of instances evaluated \cite{hossin2015review}, see figure \ref{fig:aprf} for formula. \\
+\textbf{Recall}: Recall is used to measure the fraction of positive patterns that are correctly classified \cite{hossin2015review}, 
+see figure \ref{fig:aprf} for formula. \\
+\textbf{Precision}: Precision is used to measure the positive patterns that are correctly predicted from the total predicted 
+patterns in a positive class \cite{hossin2015review}, see figure \ref{fig:aprf} for formula. \\ 
+\textbf{F1 Score}:This metric represents the harmonic mean between recall and precision values \cite{hossin2015review}, see figure 
+\ref{fig:aprf} for formula. \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.18]{evaluation_metrics_for_classification.png}
+    \caption{Accuracy, Precision, Recall and F1 Score}
+    \label{fig:aprf}
+\end{figure}
+
+\textbf{ROC Curve}:ROC is a major visualization technique for presenting the performance of a classification model. 
+It summarizes the trade-off between the \textit{true positive rate (tpr)} and \textit{false positive rate (fpr)}, see figure \ref{tprfpr} 
+for a predictive model using different probability thresholds \cite{confusionmatrix}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.18]{tpr_fpr_equation.png}
+    \caption{Equation of tpr and fpr}
+    \label{fig:tprfpr}
+\end{figure}
+A ROC curve, see figure \ref{fig:roc}, plots the true positive rate (tpr) versus the false positive rate (fpr) as a function of the 
+model’s threshold for classifying a positive. Finally, we can assess the performance of the model by the area under the ROC 
+curve (AUC). As a rule of thumb, 0.9–1 = excellent; 0.8-.09 = good; 0.7–0.8 = fair; 0.6–0.7 = poor; 0.50–0.6 = fail 
+\cite{confusionmatrix}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{AUC_ROC_Curve.png}
+    \caption{ROC Curve}
+    \label{fig:roc}
+\end{figure}
+Clusters are evaluated based on some similarity or dissimilarity measure such as the distance between cluster points. 
+If the clustering algorithm puts the data points of similar distance together and disimilar points away from the cluster, 
+then it has performed well. The aforementioned two metrics for clustering algorithm is given below,
+
+\textit{\textbf{Silhouette Coefficient}}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.60]{silhouette_coefficient.png}
+    \caption{Silhouette Coefficient}
+    \label{fig:silc}
+\end{figure}
+
+The silhouette coefficient consists of two scores in the above formula where, 
+\begin{itemize}
+    \item a - The mean distance between a sample and all other points in the same cluster.
+    \item b - The mean distance between a sample and all other points in the next nearest cluster.
+\end{itemize}
+For each sample, mean silhouette coefficient is calculated and if the value is bound between -1, then it is incorrect clustering. If
+the value is bound between 1, then it is correct clustering. If the value is around zero, then it is overlapping clusters \cite{evaluationmetric}.
+
+\textit{\textbf{Dunn's Index}} \\
+Dunn’s Index is equal to the minimum inter-cluster distance divided by the maximum cluster size. 
+Large inter-cluster distance = better separation, smaller inter-cluster distance = more compact cluster leading to high Dunn's index
+value. A higher Dunn’s index score represents better clustering \cite{evaluationmetric}. 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
 \end{document}
