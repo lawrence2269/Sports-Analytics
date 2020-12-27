@@ -421,15 +421,33 @@ points. The simplest form of clustering is the partitional clustering which aims
 subsets (clusters). The most commonly used clustering criterion is \textit{clustering error} which measures the quality of clustering.
 A popular clustering method that minimizes the clustering error is the k-means algorithm \cite{likas2003global}. Hence, K-means 
 clustering algorithm would be a good technique to cluster the players. Moreover, in K-means we can specify the number of clusters 
-we require which is an added advantage. Before getting into detailed execution and discussion of test results, let us first understand about 
-K-means algorithm.
+we require which is an added advantage. Elbow method, see figure \ref{fig:elbowMethod}, Silhouette score, see figure \ref{fig:silScore} 
+were used to find the optimal number of clusters. From the plot in figure \ref{fig:elbowMethod}, it will be harder to find the 
+optimal number of clusters. Hence, there is another way to find the optimal number of clusters, \textbf{Silhouette Score} method.
+Silhouette score ranges between -1 to +1 where values close to -1 implies the data points are assigned to wrong cluster and values 
+closer to +1 means data points are closer to the cluster and belong to the right cluster. From the plot in figure \ref{fig:silScore}, 
+it could be seen that optimal number clusters is \textbf{K = 2}.
+Before getting into detailed execution and discussion of test results, let us 
+first understand about K-means algorithm.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{elbow_method_1.png}
+    \caption{Elbow method}
+    \label{fig:elbowMethod}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.40]{silhouette_score_1.png}
+    \caption{Silhouette score}
+    \label{fig:silScore}
+\end{figure}
 
 K-means algorithm is one of the unsupervised algorithm mainly used for clustering of unlabelled data. A good clustering solution 
 is one that finds clusters such that the observations within each cluster are more similar than the clusters themselves, see figure
 \ref{fig:kmeans}.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.45]{kmeans.png}
+    \includegraphics[scale=0.38]{kmeans.png}
     \caption{K-means clustering}
     \label{fig:kmeans}
 \end{figure}
@@ -545,7 +563,191 @@ the value is bound between 1, then it is correct clustering. If the value is aro
 \textit{\textbf{Dunn's Index}} \\
 Dunn’s Index is equal to the minimum inter-cluster distance divided by the maximum cluster size. 
 Large inter-cluster distance = better separation, smaller inter-cluster distance = more compact cluster leading to high Dunn's index
-value. A higher Dunn’s index score represents better clustering \cite{evaluationmetric}. 
+value. A higher Dunn’s index score represents better clustering \cite{evaluationmetric}. In the next section, we shall read about the experimental
+results of 3 models along with their evaluation scores and plots.
+
+\section{Experimental Results \& Discussions}
+In this section, we will be seeing the results of 3 machine learning models applied on aforementioned datasets. The output is 
+evaluated based on the metrics mentioned in \textit{section 6.4}.
+
+\subsection{Model 1}
+In model 1, after performing necessary pre-processing techniques, the dataset was split into three sets of data.
+\begin{itemize}
+    \item 1\textsuperscript{st} set of data contains all features or all attributes.
+    \item 2\textsuperscript{nd} set of data contains only selected features based on correlation plot, see figure \ref{fig:corplot1}.
+    \item 3\textsuperscript{rd} set of data contains only selected features based on sklearn's selectKBest method.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.20]{correlation_plot_1.png}
+    \caption{correlation plot for model 1}
+    \label{fig:corplot1}
+\end{figure}
+
+From the correlation plot, the attributes 3P, 3PA, and 3P\% were dropped from the data leading to 2\textsuperscript{nd} set of data. 
+Using the sklean's selectKBest method, the attributes namely GP, MP, PTS, FG, FGA, FT, FTA, ORB, DRB, and TRB were selected leading
+to 3\textsuperscript{rd} set of data.
+The 3 sets of data are split into two parts each - train data and test data where train data contains 80\% of data and test data contains
+20\% of the data. This split up was done using sklearn's \textit{train-test-split} method. SVM classification method 
+with hyperparameter \textbf{C = 1} was applied on each train data and tested on each test data. The results of 3 SVM classification 
+models are given in the forthcoming sections.
+
+\subsubsection{SVM Model 1}
+\hfill\\
+This model used dataset with all features and produced the following results.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{SVM_Model_1_results.png}
+    \caption{Classification Report for SVM model with all features}
+    \label{fig:svmmodel1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{AUC_ROC_SVM_Model_1.png}
+    \caption{AUC-ROC curve for SVM model with all features}
+    \label{fig:aucrocmodel1}
+\end{figure}
+
+\subsubsection{SVM Model 2}
+\hfill\\
+This model used dataset with selected features from correlation plot and produced the following results.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{SVM_Model_2_results.png}
+    \caption{Classification Report for SVM model with selected features from correlation plot}
+    \label{fig:svmmodel2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{AUC_ROC_SVM_Model_2.png}
+    \caption{AUC-ROC curve for SVM model with selected features from correlation plot}
+    \label{fig:aucrocmodel2}
+\end{figure}
+
+\subsubsection{SVM Model 3}
+\hfill\\
+This model used dataset with selected features from feature selection and produced the following results.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{SVM_Model_3_results.png}
+    \caption{Classification Report for SVM model with selected features from feature selection}
+    \label{fig:svmmodel3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.50]{AUC_ROC_SVM_Model_3.png}
+    \caption{AUC-ROC curve for SVM model with selected features from feature selection}
+    \label{fig:aucrocmodel3}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.40]{theoritical-ROC-Curve.jpg}
+    \caption{Theoritical ROC curve}
+    \label{fig:theoroc}
+\end{figure}
+From the above AUC ROC curve plots ( with all features, With selected features based on domain knowledge and with features 
+selected using feature selection techniques ), it can be seen that model performs better with all features than with selected 
+features. Also comparing our AUC ROC curve plot(with all features) with the above theoritical AUC ROC curve, see figure \ref{fig:theoroc} 
+\cite{theoroc}, it can be seen that our model is a skillful classifier . Since the dataset is imbalanced, we need to use different 
+metrics to evaluate the model, hence it is best to choose AUC ROC curve over accuracy. Based on the observation, it can be seen 
+that AUC ROC value with all features is higher (76\% for test data and 80\% for training data) than the ROC value with selected 
+features. Moreover, we could see that the model's performance is average, this could be because of one of the following reasons:
+\begin{itemize}
+    \item Imbalanced Dataset.
+    \item Small data size.
+\end{itemize}
+The finalized model is saved using \textit{pickle} package in Python for future use.
+
+
+\subsection{Model 2}
+In model 2, after performing necessary pre-processing techniques, the dataset was split into two sets of data.
+\begin{itemize}
+    \item 1\textsuperscript{st} set of data contains all features or all attributes.
+    \item 2\textsuperscript{nd} set of data contains only selected features based on sklearn's selectKBest method.
+\end{itemize}
+It may not be possible to select features from the correlation plot, as the number of attributes for this data was very large.
+Hence, sklearn's \textit{selectKBest} method would be an ideal choice to select the features from the dataset.
+Using the sklean's selectKBest method, the attributes namely \textbf{Position, 3PAr, ORB\%, DRB\%, TRB\%, AST\%, BLK\%, DBPM, ORB, AST,}
+and \textbf{BLK} were selected leading to 2\textsuperscript{nd} set of data.
+The 2 sets of data are split into two parts each - train data and test data where train data contains 80\% of data and test data contains
+20\% of the data. This split up was done using sklearn's \textit{train-test-split} method. SVM classification method hyperparameters 
+were calculated by using sklearn's \textit{GridSearchCV} method which produced the following values for the hyperparameters,
+\textbf{C: 10, gamma: 0.01, and kernel: 'rbf'}. SVM classification method with the calculated hyperparameters
+was applied on each train data and tested on each test data. The results of 2 SVM classification 
+models are given in the forthcoming sections.
+\subsubsection{SVM Model 1}
+\hfill\\
+This model used dataset with selected features and produced the following results.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.40]{SVM-Model-2-1-selected-features.png}
+    \caption{Classification Report for SVM model with selected features}
+    \label{fig:svmmodel21}
+\end{figure}
+\newpage
+\subsubsection{SVM Model 2}
+\hfill\\
+This model used dataset with all features and produced the following results.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.40]{SVM-Model-2-2-all-features.png}
+    \caption{Classification Report for SVM model with all features}
+    \label{fig:svmmodel22}
+\end{figure}
+From the above classification reports (with all features, with features selected using feature selection techniques), it can be 
+seen that model performs better with all features than with selected features. Based on the observation, it can be seen 
+that accuracy value with all features is higher (71\% for test data and 77\% for training data) than the accuracy vlaue with selected 
+features. The finalized model is saved using \textit{pickle} package in Python for future use.
+
+\subsection{Model 3}
+In model 3, after performing necessary pre-processing and feature-engineering techniques, the dataset size was reduced by filtering 
+based on the number of games played by players is greater than 30. K-means algorithm is applied on the filtered and scaled data with
+optimal number of clusters (K=2) found using Elbow method and Silhouette method. Since, we don't have labelled data to evaluate the 
+performance of the model, we cannot calculate accuracy, F1 score, and etc. So, it would be a better choice to test the model with
+real world data prediction and comparing the predicted train data with real world data. 
+
+The predicted train data was split into two parts - cluster 0 data and cluster 1 data where cluster 0 holds good performing players
+data while cluster 1 holds worst performing players data. With the help of nba.com and another webpage, found previous regular 
+season (2019-2020) best player was \textit{LeBron James} \cite{bestplayer} and one of worst players was \textit{Gorgui Dieng} \cite{worstplayer}.
+LeBron James's performance data was present in cluster 0 data, but not in cluster 1 data. Similarly, Gorgui Dieng's performance
+data was present in cluster 1 data, but not in cluster 0 data. This finding lead me to understand that cluster 0 is for good 
+performing players data while cluster 1 is for players with bad performance records. In order to test this model's performance
+furthermore, two players (LeBron James and Miles Plumlee) performance data were taken from the season 2018-2019 in basketball-reference.com.
+After performing same pre-processing technique on the unforseen data, it is passed into the trained model. The model predicted or 
+clustered LeBron James \cite{bestplayer2} to cluster 0 and Miles Plumlee \cite{worstplayer2} to cluster 1, by this result, 
+it could be seen that this model does pretty well.
+
+Earlier, companies used to input these data into their own statistical algorithms manually. As a result, it was time consuming and 
+requires lot of human resources. But, this system is time efficient and less error-prone. In forthcoming section, we shall read 
+about how these models can be improved and put into action, how this system can be used in otherways and etc. 
+
+\section{Conclusion}
+The trained models were saved to disk using \textit{Pickle} library in Python to put them into later use. The evaluation scores 
+of these models were as expected and generalizes well on unforseen data. These models could be either incorporated into the software 
+that will be used by team coaches, team managers, and etc. or made available as a Web API. Moreover, this system could also be used 
+for team formation, that is, team coaches could select players whose performance data matches with the opponent team's players
+performance data. As a result, it would be easy to form a strategy to win the forthcoming matches. This would increase the team's 
+popularity and revenue generation.
+
+In conclusion, combining these 3 mathematical models would be an innovative approach for the teams in picking players every year.
+However, one must understand that data is trivial for these models, if there are more noises or errors in data, then the models 
+would provide incorrect prediction. As a result, the team might underperform during a match and eventually, lose the game which is 
+very cost expensive.
+
+\subsection{Further improvements}
+This approach could be further improved by performing any one of the following items;
+\begin{itemize}
+    \item The models performance and prediction power can be improved by training these models on real time players data which is of 
+    larger size, that is, big data.
+    \item Making an app using \textit{\textbf{Streamlit}} and incorporating these models which would make the system an opensource.
+    \item Further, many models could be linked with these models such as model to predict salary, model for injury analysis and etc.
+\end{itemize}
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
 \end{document}
