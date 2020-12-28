@@ -20,5 +20,5 @@ Data for the above mentioned machine learning models are being collected from th
 * and etc.
 
 The collected data undergoes the following data preparation steps such as cleaning, standardization, missing value imputation and concluding with model building.
-<br>
-If you have trouble viewing the jupyter notebook in github, please clikc this [link](https://nbviewer.jupyter.org/github/lawrence2269/Sports-Analytics/blob/main/NBA_Draft_Picking_System.ipynb) to view it in separate window.
+<br><br>
+If you have trouble viewing the jupyter notebook in github, please click this [link](https://nbviewer.jupyter.org/github/lawrence2269/Sports-Analytics/blob/main/NBA_Draft_Picking_System.ipynb) to view it in separate window.
