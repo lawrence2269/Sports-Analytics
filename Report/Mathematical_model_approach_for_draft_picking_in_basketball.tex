@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{makecell}
+\usepackage{xcolor}
 
 \settopmatter{printacmref=false}
 
@@ -20,6 +21,8 @@
 \pagestyle{plain} % Remove ACM page header
 
 \section{Introduction}
+Analytics is being defined as "an application of analysis on recorded data or information using statistical modelling and 
+computer-based techniques to yield meaningful insights for good decision making" \cite{jennette2018drawing}.
 Analytics is being used in all fields such as healthcare, manufacturing, banking and etc. for decision-making. Likewise, 
 analytics is also playing a major role in Sports industry such as football, baseball, basketball and etc. to predict player's 
 next move, injury analysis, position analysis and etc. Sports analytics is being spoken as a concept for many years which 
@@ -61,7 +64,7 @@ as Rebounds, TurnOver and etc were calculated from this system as well as from m
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.20]{STATS-SportVU-technology.png}
+    \includegraphics[scale=0.20]{images/STATS-SportVU-technology.png}
     \caption{SportsVU in basketball court.}
     \label{fig:SportsVU}
 \end{figure}
@@ -102,7 +105,7 @@ universities, institutions, professors and organizations and they are as follows
 \end{itemize}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.70]{Machine_Learning.png}
+    \includegraphics[scale=0.70]{images/Machine_Learning.png}
     \caption{Machine Learning in an eagle view}
     \label{fig:ml}
 \end{figure}
@@ -157,7 +160,7 @@ avoiding overtraining and injuries. Concussion research is a hot field. Team ana
 strategies and tactics, competitive assessments, and optimal roster choices under various onfield or on-court situations.” \cite{tichy2016changing}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{sportsanalytics.jpg}
+    \includegraphics[scale=0.50]{images/sportsanalytics.jpg}
     \caption{Sports Analytics}
     \label{fig:sa}
 \end{figure}
@@ -245,22 +248,6 @@ The dataset contains players performance with the following main attributes,
             \hline
             TRB & Total Rebounds \\
             \hline
-            AST & Assist \\
-            \hline
-            AST\% & \makecell{Assist percentage \\the formula is 100 * AST / (((MP / (Tm MP / 5))\\ * Tm FG) - FG).
-            Assist percentage is an estimate of the \\percentage of teammate field \\goals a player assisted while he was on the floor.} \\
-            \hline
-            STL & Steal \\
-            \hline
-            BLK & Block \\
-            \hline
-            BLK\% & \makecell{Block Percentage \\ the formula is 100 * (BLK * (Tm MP / 5)) /\\ (MP * (Opp FGA - Opp 3PA)) \\
-            Block percentage is an estimate of the percentage of \\opponent two-point field goal attempts blocked\\ by the player while he was on the floor}\\
-            \hline
-            TOV & Turnover \\
-            \hline
-            TOV\% & \makecell{Turnover percentage \\the formula is 100 * TOV / (FGA + 0.44 * FTA + TOV)\\Turnover percentage is an estimate \\of turnovers per 100 plays.} \\
-            \hline
              & and etc. \\
             \hline
         \end{tabular}
@@ -269,7 +256,7 @@ The dataset contains players performance with the following main attributes,
     \end{table}
 \end{center}
 There are other attributes such as VORP, WS, WS$/$48 and etc. which can be known further from the following page \textbf{\href{https://www.basketball-reference.com/about/glossary.html}
-{basketball-reference.com}} glossary. These attributes contains both continuous and categorical data type.
+{\textcolor{blue}{basketball-reference.com}}} glossary. These attributes contains both continuous and categorical data type.
 \subsubsection{Pre-processing}
 \hfill\\
 The pre-processing process consists of following steps,
@@ -292,13 +279,13 @@ between independent variables and dependent variable was found using scatter plo
 response variable, see figure \ref{fig:model1scatter}.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{model_1_scatter_plot.png}
+    \includegraphics[scale=0.25]{images/model_1_scatter_plot.png}
     \caption{Model 1 scatter plot between independent and dependent variables}
     \label{fig:model1scatter}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{model_1_bar_plot.png}
+    \includegraphics[scale=0.25]{images/model_1_bar_plot.png}
     \caption{Model 1 count plot for classes in response variable}
     \label{fig:model1bar}
 \end{figure}
@@ -309,13 +296,13 @@ mentioned pre-processing steps, the separability between independent variables a
 between games played and points earned coloured by response variable, see figure \ref{fig:model2scatter}.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{model_2_scatter_plot.png}
+    \includegraphics[scale=0.25]{images/model_2_scatter_plot.png}
     \caption{Model 2 scatter plot between independent and dependent variables}
     \label{fig:model2scatter}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{model_2_bar_plot.png}
+    \includegraphics[scale=0.25]{images/model_2_bar_plot.png}
     \caption{Model 2 count plot for classes in response variable}
     \label{fig:model2bar}
 \end{figure}
@@ -332,7 +319,7 @@ The objective of SVM is to find a hyperplane in N-dimensional space (N - number 
 the data points, see figure \ref{fig:svm_1}.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{svm_1.png}
+    \includegraphics[scale=0.25]{images/svm_1.png}
     \caption{Hyperplane separating datapoints in N-dimesnional space}
     \label{fig:svm_1}
 \end{figure}
@@ -348,13 +335,13 @@ number of features exceeds 3.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{svm_hyperplane_1.png}
+    \includegraphics[scale=0.25]{images/svm_hyperplane_1.png}
     \caption{Hyperplane in 1-dimesnional space}
     \label{fig:svm_hyperplane_1}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.60]{svm_hyperplane_2.png}
+    \includegraphics[scale=0.60]{images/svm_hyperplane_2.png}
     \caption{Hyperplane in 2-dimesnional space}
     \label{fig:svm_hyperplane_2}
 \end{figure}
@@ -369,7 +356,7 @@ the boundary, then the model will not generalize well on unforseen data. Moreove
 The equation for hyperplane in P-dimension is given below.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.40]{SVM_Equation_for_p-dimension.png}
+    \includegraphics[scale=0.40]{images/SVM_Equation_for_p-dimension.png}
     \caption{Equation for P-dimesnional space}
     \label{fig:svm_dimension_equation}
 \end{figure}
@@ -377,7 +364,7 @@ The equation for hyperplane in P-dimension is given below.
 Where the datapoints are, see figure \ref{fig:svm_datapoints},
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.40]{svm_data_points.png}
+    \includegraphics[scale=0.40]{images/svm_data_points.png}
     \caption{Equation for P-dimesnional space}
     \label{fig:svm_datapoints}
 \end{figure}
@@ -385,7 +372,7 @@ Where the datapoints are, see figure \ref{fig:svm_datapoints},
 and the datapoints are classified into different classes based on the below equation, see figure \ref{fig:classification}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.40]{dimension_equation_for_classification.png}
+    \includegraphics[scale=0.40]{images/dimension_equation_for_classification.png}
     \caption{Equation for classifying data points}
     \label{fig:classification}
 \end{figure}
@@ -431,13 +418,13 @@ Before getting into detailed execution and discussion of test results, let us
 first understand about K-means algorithm.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.45]{elbow_method_1.png}
+    \includegraphics[scale=0.45]{images/elbow_method_1.png}
     \caption{Elbow method}
     \label{fig:elbowMethod}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.40]{silhouette_score_1.png}
+    \includegraphics[scale=0.40]{images/silhouette_score_1.png}
     \caption{Silhouette score}
     \label{fig:silScore}
 \end{figure}
@@ -447,7 +434,7 @@ is one that finds clusters such that the observations within each cluster are mo
 \ref{fig:kmeans}.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.38]{kmeans.png}
+    \includegraphics[scale=0.38]{images/kmeans.png}
     \caption{K-means clustering}
     \label{fig:kmeans}
 \end{figure}
@@ -465,7 +452,7 @@ as possible \cite{kmeans}.
 The pictorial representation of working of K-means algorithm, see figure \ref{fig:kmeansworking},
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.55]{kmeans_1.jpeg}
+    \includegraphics[scale=0.55]{images/kmeans_1.jpeg}
     \caption{Working of K-means clustering}
     \label{fig:kmeansworking}
 \end{figure}
@@ -479,7 +466,7 @@ fits best at that point \cite{elbow}. The pictorial representation of choosing K
 The test results of this model is explained in the forthcoming sections.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{elbow_method.png}
+    \includegraphics[scale=0.25]{images/elbow_method.png}
     \caption{Elbow Method}
     \label{fig:elbowmethod}
 \end{figure}
@@ -501,7 +488,7 @@ are being made \cite{confusionmatrix}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.22]{confusion_matrix.png}
+    \includegraphics[scale=0.22]{images/confusion_matrix.png}
     \caption{Confusion Matrix}
     \label{fig:confusionmatrix}
 \end{figure}
@@ -516,7 +503,7 @@ patterns in a positive class \cite{hossin2015review}, see figure \ref{fig:aprf} 
 \ref{fig:aprf} for formula. \\
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.18]{evaluation_metrics_for_classification.png}
+    \includegraphics[scale=0.18]{images/evaluation_metrics_for_classification.png}
     \caption{Accuracy, Precision, Recall and F1 Score}
     \label{fig:aprf}
 \end{figure}
@@ -526,7 +513,7 @@ It summarizes the trade-off between the \textit{true positive rate (tpr)} and \t
 for a predictive model using different probability thresholds \cite{confusionmatrix}.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.18]{tpr_fpr_equation.png}
+    \includegraphics[scale=0.18]{images/tpr_fpr_equation.png}
     \caption{Equation of tpr and fpr}
     \label{fig:tprfpr}
 \end{figure}
@@ -536,7 +523,7 @@ curve (AUC). As a rule of thumb, 0.9–1 = excellent; 0.8-.09 = good; 0.7–0.8 
 \cite{confusionmatrix}.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.25]{AUC_ROC_Curve.png}
+    \includegraphics[scale=0.25]{images/AUC_ROC_Curve.png}
     \caption{ROC Curve}
     \label{fig:roc}
 \end{figure}
@@ -547,7 +534,7 @@ then it has performed well. The aforementioned two metrics for clustering algori
 \textit{\textbf{Silhouette Coefficient}}\\
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.60]{silhouette_coefficient.png}
+    \includegraphics[scale=0.60]{images/silhouette_coefficient.png}
     \caption{Silhouette Coefficient}
     \label{fig:silc}
 \end{figure}
@@ -579,7 +566,7 @@ In model 1, after performing necessary pre-processing techniques, the dataset wa
 \end{itemize}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.20]{correlation_plot_1.png}
+    \includegraphics[scale=0.20]{images/correlation_plot_1.png}
     \caption{correlation plot for model 1}
     \label{fig:corplot1}
 \end{figure}
@@ -597,14 +584,14 @@ models are given in the forthcoming sections.
 This model used dataset with all features and produced the following results.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{SVM_Model_1_results.png}
+    \includegraphics[scale=0.50]{images/SVM_Model_1_results.png}
     \caption{Classification Report for SVM model with all features}
     \label{fig:svmmodel1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{AUC_ROC_SVM_Model_1.png}
+    \includegraphics[scale=0.50]{images/AUC_ROC_SVM_Model_1.png}
     \caption{AUC-ROC curve for SVM model with all features}
     \label{fig:aucrocmodel1}
 \end{figure}
@@ -615,14 +602,14 @@ This model used dataset with selected features from correlation plot and produce
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{SVM_Model_2_results.png}
+    \includegraphics[scale=0.50]{images/SVM_Model_2_results.png}
     \caption{Classification Report for SVM model with selected features from correlation plot}
     \label{fig:svmmodel2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{AUC_ROC_SVM_Model_2.png}
+    \includegraphics[scale=0.50]{images/AUC_ROC_SVM_Model_2.png}
     \caption{AUC-ROC curve for SVM model with selected features from correlation plot}
     \label{fig:aucrocmodel2}
 \end{figure}
@@ -633,21 +620,21 @@ This model used dataset with selected features from feature selection and produc
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{SVM_Model_3_results.png}
+    \includegraphics[scale=0.50]{images/SVM_Model_3_results.png}
     \caption{Classification Report for SVM model with selected features from feature selection}
     \label{fig:svmmodel3}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.50]{AUC_ROC_SVM_Model_3.png}
+    \includegraphics[scale=0.50]{images/AUC_ROC_SVM_Model_3.png}
     \caption{AUC-ROC curve for SVM model with selected features from feature selection}
     \label{fig:aucrocmodel3}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.40]{theoritical-ROC-Curve.jpg}
+    \includegraphics[scale=0.40]{images/theoritical-ROC-Curve.jpg}
     \caption{Theoritical ROC curve}
     \label{fig:theoroc}
 \end{figure}
@@ -686,7 +673,7 @@ models are given in the forthcoming sections.
 This model used dataset with selected features and produced the following results.
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.40]{SVM-Model-2-1-selected-features.png}
+    \includegraphics[scale=0.40]{images/SVM-Model-2-1-selected-features.png}
     \caption{Classification Report for SVM model with selected features}
     \label{fig:svmmodel21}
 \end{figure}
@@ -696,7 +683,7 @@ This model used dataset with selected features and produced the following result
 This model used dataset with all features and produced the following results.
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.40]{SVM-Model-2-2-all-features.png}
+    \includegraphics[scale=0.40]{images/SVM-Model-2-2-all-features.png}
     \caption{Classification Report for SVM model with all features}
     \label{fig:svmmodel22}
 \end{figure}
@@ -721,7 +708,8 @@ performing players data while cluster 1 is for players with bad performance reco
 furthermore, two players (LeBron James and Miles Plumlee) performance data were taken from the season 2018-2019 in basketball-reference.com.
 After performing same pre-processing technique on the unforseen data, it is passed into the trained model. The model predicted or 
 clustered LeBron James \cite{bestplayer2} to cluster 0 and Miles Plumlee \cite{worstplayer2} to cluster 1, by this result, 
-it could be seen that this model does pretty well.
+it could be seen that this model does pretty well. The evaluation results are given in the last section of my \href{\detokenize{https://nbviewer.jupyter.org/github/lawrence2269/Sports-Analytics
+/blob/main/NBA_Draft_Picking_System.ipynb}}{\textcolor{blue}{jupyter notebook}}
 
 Earlier, companies used to input these data into their own statistical algorithms manually. As a result, it was time consuming and 
 requires lot of human resources. But, this system is time efficient and less error-prone. In forthcoming section, we shall read 
